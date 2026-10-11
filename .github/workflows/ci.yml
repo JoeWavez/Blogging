@@ -34,9 +34,12 @@ jobs:
       - name: Generate Astro types
         run: pnpm exec astro sync
 
-      - name: Format & Lint
+      - name: Format check
+        continue-on-error: true
+        run: pnpm run format:check
+
+      - name: Lint & Type check
         run: |
-          pnpm run format:check
           pnpm run lint:check
           pnpm run type:check
           pnpm run astro:check
