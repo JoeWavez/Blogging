@@ -4,7 +4,8 @@
 
 export const SITE = {
   // Basic information
-  url: "https://blog-two-nu-wsl980reh8.vercel.app",  title: "Astro Jing", // Your blog title
+  url: "https://blog-two-nu-wsl980reh8.vercel.app",
+  title: "JoeWaves", // Your blog title
   description: "Blog for JoeWaves", // Your blog description
   author: "JoeWaves", // 君の名は ~
 
