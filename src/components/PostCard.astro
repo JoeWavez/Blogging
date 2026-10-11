@@ -11,8 +11,8 @@ interface Props {
 
 const { id, title, description, date, updated } = Astro.props;
 
-// Explicitly ensure there is always a slash between base and posts
-const base = import.meta.env.BASE_URL ? import.meta.env.BASE_URL.replace(/\/+$/, '') : '/Blogging';
+// Adapt to root domain or subpath automatically
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/+$/, '');
 const postUrl = `${base}/posts/${id}`;
 ---
 
