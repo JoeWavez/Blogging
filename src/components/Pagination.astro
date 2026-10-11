@@ -11,16 +11,20 @@ interface Props {
 
 const { currentPage, totalPages, baseUrl: rawBaseUrl } = Astro.props;
 
-// Ensure the base path properly includes import.meta.env.BASE_URL
-const base = import.meta.env.BASE_URL ? import.meta.env.BASE_URL.replace(/\/+$/, '') : '';
-const cleanBaseUrl = rawBaseUrl.startsWith(base) 
-  ? rawBaseUrl 
-  : `${base}${rawBaseUrl.startsWith('/') ? '' : '/'}${rawBaseUrl}`;
+// Handle root domain (when BASE_URL is '/' or empty)
+const base = import.meta.env.BASE_URL === '/' || !import.meta.env.BASE_URL ? '' : import.meta.env.BASE_URL.replace(/\/+$/, '');
+
+// Clean up and construct the correct base URL for pagination
+let cleanBaseUrl = rawBaseUrl.startsWith('/') ? rawBaseUrl : `/${rawBaseUrl}`;
+if (base && cleanBaseUrl.startsWith(base)) {
+  cleanBaseUrl = cleanBaseUrl.slice(base.length);
+}
+const finalBaseUrl = `${base}${cleanBaseUrl}`.replace(/\/+/g, '/');
 
 const hasPrevPage = currentPage > 1;
 const hasNextPage = currentPage < totalPages;
-const prevPageUrl = currentPage - 1 === 1 ? cleanBaseUrl : `${cleanBaseUrl}/${currentPage - 1}`;
-const nextPageUrl = `${cleanBaseUrl}/${currentPage + 1}`;
+const prevPageUrl = currentPage - 1 === 1 ? finalBaseUrl : `${finalBaseUrl}/${currentPage - 1}`;
+const nextPageUrl = `${finalBaseUrl}/${currentPage + 1}`;
 ---
 
 <>
