@@ -22,7 +22,7 @@ const contentDirAbsolute = path.resolve(__dirname, CONTENT_DIR);
 // https://astro.build/config
 export default defineConfig({
   site: SITE.url,
-  base: "/Blogging",
+  base: "",
   compressHTML: true,
   trailingSlash: "never",
   build: {
