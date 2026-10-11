@@ -1,16 +1,3 @@
-<!-- markdownlint-disable first-line-h1 -->
+Hi I'm JoeWaves! I built this blog to share about personal things and projects I'm working on. I hope you guys can checkup every so often for new posts, thanks!
 
-[Astro Jing](https://github.com/ziteh/astro-jing-theme) is a calm blog theme powered by [Astro](https://astro.build/).
-
-Features:
-
-- Auto-generate post descriptions based on character count or up to the `<!-- more -->` tag
-- Auto-expanding & collapsing table of contents
-- Open Graph image generation
-- Full-text search
-- Syntax highlighting
-- Math equations
-- Internationalization (i18n)
-- Comment systems (Giscus / Disqus)
-- Sitemap & RSS feed
-- Static site
+- JoeWaves
