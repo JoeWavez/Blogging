@@ -12,9 +12,10 @@ interface Props {
 }
 
 const { id, title, description, date, updated } = Astro.props;
+const postUrl = `${import.meta.env.BASE_URL}posts/${id}`.replace(/\/+/g, '/');
 ---
 
-<a href={`/posts/${id}`} data-astro-prefetch>
+<a href={postUrl} data-astro-prefetch>
   <div class="card">
     <h2>{title}</h2>
     {description && <p class="desc">{description}</p>}
