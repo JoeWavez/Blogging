@@ -26,7 +26,7 @@ export default defineConfig({
   compressHTML: true,
   trailingSlash: "never",
   build: {
-    format: "file", // generate `page.html` instead of `page/index.html`
+    format: "directory", // generate standard folders and index files for GitHub Pages
   },
   prefetch: {
     // Keep prefetch, but only prefetch for links with `data-astro-prefetch`
