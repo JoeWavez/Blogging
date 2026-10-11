@@ -22,6 +22,7 @@ const contentDirAbsolute = path.resolve(__dirname, CONTENT_DIR);
 // https://astro.build/config
 export default defineConfig({
   site: SITE.url,
+  base: "/Blogging",
   compressHTML: true,
   trailingSlash: "never",
   build: {
@@ -115,7 +116,7 @@ export default defineConfig({
       // Exclude list pages from the sitemap
       filter: (page) => {
         const path = new URL(page).pathname;
-        return !/^\/(tags|categories|archives|search)(\/|$)|^\/posts(\/\d+)?$/.test(path);
+        return !/^\/(tags|categories|archives|search)(\/|$)\vert{}^\/posts(\/\d+)?$/.test(path);
       },
       serialize(item) {
         if (/\/posts\//.test(item.url)) {
