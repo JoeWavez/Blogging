@@ -5,18 +5,23 @@ import IconX from "@/assets/icons/x.svg";
 import HeaderLink from "@/components/HeaderLink.astro";
 import ThemeToggle from "@/components/ThemeToggle.astro";
 import { _t, SITE } from "@/config";
+
+const base = import.meta.env.BASE_URL ? import.meta.env.BASE_URL.replace(/\/+$/, '') : '';
+const homeUrl = `${base}/`;
+const postsUrl = `${base}/posts`;
+const searchUrl = `${base}/search`;
 ---
 
 <header>
   <nav aria-label="Main navigation">
-    <span class="site-title"><a href="/">{SITE.title}</a></span>
+    <span class="site-title"><a href={homeUrl}>{SITE.title}</a></span>
     <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
       <IconDotsVertical class="icon-open" />
       <IconX class="icon-close" />
     </button>
     <div class="internal-links">
-      <HeaderLink href="/posts">{_t.posts.title}</HeaderLink>
-      <HeaderLink href="/search" class="header-icon-link" aria-label={_t.search.title}
+      <HeaderLink href={postsUrl}>{_t.posts.title}</HeaderLink>
+      <HeaderLink href={searchUrl} class="header-icon-link" aria-label={_t.search.title}
         ><IconSearch class="search-icon" /><span class="search-label">{_t.search.title}</span
         ></HeaderLink
       >
