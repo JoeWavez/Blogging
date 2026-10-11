@@ -1,10 +1,10 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getEntry, render } from "astro:content";
 import "@/styles/post.css";
 import { _t } from "@/config";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
-const [about] = await getCollection("about");
+const about = await getEntry("about", "about") || await getEntry("content", "about");
 const { Content } = await render(about);
 ---
 
