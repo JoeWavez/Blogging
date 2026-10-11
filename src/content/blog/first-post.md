@@ -1,7 +1,7 @@
 ---
 title: "Test Post"
 description: "Testing"
-pubDate: 2026-10-11
+date: 2026-10-11
 draft: false
 ---
 
