@@ -7,18 +7,13 @@ interface Props {
   description?: string;
   date: Date;
   updated?: Date;
-  // tags?: string[];
-  // category?: string[];
 }
 
 const { id, title, description, date, updated } = Astro.props;
 
-// Ensure BASE_URL ends cleanly with a single slash before appending paths
-const baseUrl = import.meta.env.BASE_URL.endsWith('/') 
-  ? import.meta.env.BASE_URL 
-  : `${import.meta.env.BASE_URL}/`;
-
-const postUrl = `${baseUrl}posts/${id}`;
+// Explicitly ensure there is always a slash between base and posts
+const base = import.meta.env.BASE_URL ? import.meta.env.BASE_URL.replace(/\/+$/, '') : '/Blogging';
+const postUrl = `${base}/posts/${id}`;
 ---
 
 <a href={postUrl} data-astro-prefetch>
