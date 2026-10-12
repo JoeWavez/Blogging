@@ -29,10 +29,31 @@
   /* Layout */
   --content-width: 720px;
 
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+
   /* Scrollbar */
   overflow-y: scroll;
   scrollbar-color: var(--color-500) transparent;
   /* scrollbar-width: thin; */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+::selection {
+  background-color: var(--color-sp);
+  color: var(--color-900);
 }
 
 :root[data-theme="dark"] {
@@ -63,6 +84,7 @@ body {
   min-height: 100vh;
   font-family: var(--font-body);
   font-weight: var(--font-weight-light);
+  font-optical-sizing: auto;
   margin: 0;
   overflow-x: clip;
   background: var(--color-100);
@@ -72,6 +94,8 @@ body {
   font-size: var(--font-size-md);
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
 }
 
 main {

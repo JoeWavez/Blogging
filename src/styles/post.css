@@ -26,6 +26,8 @@ h6 {
   color: var(--color-900);
   font-weight: var(--font-weight-bold);
   line-height: 1.2;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
 }
 h1 {
   font-size: var(--font-size-4xl);
@@ -136,7 +138,7 @@ img {
   color: var(--color-500);
   text-decoration: none;
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity var(--duration-fast) var(--ease-out);
 }
 h1:hover .icon-link::before,
 h2:hover .icon-link::before,
@@ -158,6 +160,8 @@ h6:hover .icon-link::before {
 
 .meta {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5em;
   margin: 0 0 0.5em 0;
   color: var(--color-700);
   font-size: var(--font-size-sm);
@@ -232,13 +236,18 @@ h6:hover .icon-link::before {
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* gap: 0.25em; */
+  gap: 0.5em;
   text-decoration: none;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-normal) var(--ease-out);
 }
-/* .post-nav a:hover {
-  border-color: var(--color-700);
-  color: var(--color-900);
-} */
+.post-nav-next:hover {
+  transform: translateX(2px);
+}
+.post-nav-prev:hover {
+  transform: translateX(-2px);
+}
 .post-nav-prev {
   margin-left: auto;
   text-align: right;
@@ -258,4 +267,9 @@ h6:hover .icon-link::before {
 .post-nav-next:hover .post-nav-label,
 .post-nav-next:hover .post-nav-title {
   color: var(--color-900);
+}
+@media (prefers-reduced-motion: reduce) {
+  .post-nav a {
+    transition: none;
+  }
 }
