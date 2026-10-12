@@ -25,6 +25,7 @@ const blog = defineCollection({
       toc: z.boolean().default(SITE.defaultFmToc),
       comments: z.boolean().default(SITE.defaultFmComments),
       math: z.boolean().default(SITE.defaultFmMath),
+      image: z.string().optional(), // <-- Added this line
     }),
 });
 
