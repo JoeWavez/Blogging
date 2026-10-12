@@ -6,7 +6,7 @@ import HeaderLink from "@/components/HeaderLink.astro";
 import ThemeToggle from "@/components/ThemeToggle.astro";
 import { _t, SITE } from "@/config";
 
-const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/+$/, '');
+const base = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/+$/, "");
 const homeUrl = `${base}/`;
 const postsUrl = `${base}/posts`;
 const searchUrl = `${base}/search`;
@@ -30,7 +30,6 @@ const searchUrl = `${base}/search`;
   </nav>
 </header>
 
-
 <script is:inline define:vars={{ __DEV__: import.meta.env.DEV }}>
   (function () {
     function initMenu() {
@@ -47,7 +46,17 @@ const searchUrl = `${base}/search`;
       });
     }
 
+    function initHeaderShadow() {
+      const header = document.querySelector("header");
+      if (!header) return;
+
+      const update = () => header.classList.toggle("scrolled", window.scrollY > 4);
+      update();
+      window.addEventListener("scroll", update, { passive: true });
+    }
+
     document.addEventListener("astro:page-load", initMenu);
+    document.addEventListener("astro:page-load", initHeaderShadow);
   })();
 </script>
 
@@ -60,6 +69,25 @@ const searchUrl = `${base}/search`;
     border: none;
     border-bottom: 1px solid var(--color-500);
     font-weight: var(--font-weight-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: color-mix(in srgb, var(--color-100) 82%, transparent);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    transition:
+      box-shadow var(--duration-normal) var(--ease-out),
+      background-color var(--duration-normal) var(--ease-out);
+  }
+  header.scrolled {
+    box-shadow:
+      0 1px 0 var(--color-500),
+      0 8px 24px -16px var(--color-shadow);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    header {
+      background: var(--color-100);
+    }
   }
   @media (--bp-md) {
     header {
@@ -70,11 +98,13 @@ const searchUrl = `${base}/search`;
     margin: 0;
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-bold);
+    letter-spacing: -0.01em;
   }
   .site-title a,
   .site-title a.active {
     color: var(--color-900);
     text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out);
   }
   nav {
     display: flex;
@@ -90,6 +120,9 @@ const searchUrl = `${base}/search`;
     color: var(--color-700);
     border-bottom: 2px solid transparent;
     text-decoration: none;
+    transition:
+      color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
   }
   nav a:hover {
     color: var(--color-900);
@@ -101,6 +134,7 @@ const searchUrl = `${base}/search`;
   :global(nav a.header-icon-link) {
     display: flex;
     align-items: center;
+    gap: 0.35em;
   }
   :global(.search-label) {
     display: none;
@@ -125,6 +159,16 @@ const searchUrl = `${base}/search`;
     cursor: pointer;
     color: var(--color-900);
     line-height: 0;
+    border-radius: 6px;
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out);
+  }
+  .menu-toggle:hover {
+    background: var(--color-300);
+  }
+  .menu-toggle:active {
+    transform: scale(0.92);
   }
 
   @media not (--bp-md) {
@@ -149,6 +193,31 @@ const searchUrl = `${base}/search`;
       flex-direction: column;
       align-items: center;
       width: 100%;
+      animation: menu-drop var(--duration-normal) var(--ease-out);
+      transform-origin: top;
+    }
+  }
+
+  @keyframes menu-drop {
+    from {
+      opacity: 0;
+      transform: translateY(-0.5em);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    header,
+    header.scrolled,
+    .site-title a,
+    nav a,
+    .menu-toggle,
+    :global(header.open) .internal-links {
+      transition: none;
+      animation: none;
     }
   }
 </style>

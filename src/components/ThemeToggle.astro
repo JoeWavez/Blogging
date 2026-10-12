@@ -15,17 +15,52 @@ import IconSun from "@/assets/icons/sun.svg";
     cursor: pointer;
     padding: 1em 0.5em;
     color: var(--color-700);
-    display: flex;
-    align-items: center;
+    display: grid;
+    place-items: center;
+    border-radius: 6px;
+    transition:
+      color var(--duration-fast) var(--ease-out),
+      background-color var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out);
   }
   .theme-toggle:hover {
     color: var(--color-900);
+    background: var(--color-300);
+  }
+  .theme-toggle:active {
+    transform: scale(0.92);
+  }
+  .icon-sun,
+  .icon-moon {
+    grid-area: 1 / 1;
+    display: flex;
+    pointer-events: none;
+    transition:
+      opacity var(--duration-normal) var(--ease-out),
+      transform var(--duration-normal) var(--ease-out);
   }
   :global(:root[data-theme="dark"]) .icon-sun {
-    display: none;
+    opacity: 0;
+    transform: rotate(90deg) scale(0.6);
+  }
+  :global(:root[data-theme="dark"]) .icon-moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+  :global(:root:not([data-theme="dark"])) .icon-sun {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
   }
   :global(:root:not([data-theme="dark"])) .icon-moon {
-    display: none;
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.6);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .theme-toggle,
+    .icon-sun,
+    .icon-moon {
+      transition: none;
+    }
   }
 </style>
 

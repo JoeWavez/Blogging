@@ -12,7 +12,7 @@ interface Props {
 const { id, title, description, date, updated } = Astro.props;
 
 // Adapt to root domain or subpath automatically
-const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL.replace(/\/+$/, '');
+const base = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/+$/, "");
 const postUrl = `${base}/posts/${id}`;
 ---
 
@@ -31,12 +31,29 @@ const postUrl = `${base}/posts/${id}`;
     padding-bottom: 1.5rem;
   }
   a {
+    display: block;
     text-decoration: none;
+    transition: transform var(--duration-normal) var(--ease-out);
+  }
+  a:hover {
+    transform: translateY(-2px);
   }
   h2 {
     margin: 0 0 0.5rem 0;
     font-size: var(--font-size-xl);
     line-height: 1.2;
+    letter-spacing: -0.01em;
+    background-image: linear-gradient(var(--color-900), var(--color-900));
+    background-repeat: no-repeat;
+    background-size: 0% 1.5px;
+    background-position: 0 100%;
+    transition:
+      background-size var(--duration-normal) var(--ease-out),
+      color var(--duration-fast) var(--ease-out);
+  }
+  a:hover h2 {
+    background-size: 100% 1.5px;
+    color: var(--color-700);
   }
   p {
     margin: 0.125rem 0 0 0;
@@ -48,5 +65,11 @@ const postUrl = `${base}/posts/${id}`;
   .date {
     color: var(--color-700);
     font-size: var(--font-size-sm);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    a,
+    h2 {
+      transition: none;
+    }
   }
 </style>
