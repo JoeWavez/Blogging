@@ -26,6 +26,7 @@ const recentPosts = posts.filter((post) => !post.data.featured).slice(0, SITE.po
                     description={post.data.description}
                     date={post.data.date}
                     updated={post.data.updated}
+                    image={post.data.image}
                   />
                 </li>
               ))}
@@ -45,6 +46,7 @@ const recentPosts = posts.filter((post) => !post.data.featured).slice(0, SITE.po
                 description={post.data.description}
                 date={post.data.date}
                 updated={post.data.updated}
+                image={post.data.image}
               />
             </li>
           ))
