@@ -3,6 +3,7 @@ title: "Personal AI Assistant"
 description: "This weekend I built a AI Agent for my computer!"
 date: 2026-10-12
 draft: false
+header_image: "https://github.com/user-attachments/assets/bfe33e0e-8d46-4cc1-bd49-ad57ca8280a0"
 ---
 
 <img width="1863" height="1197" alt="image" src="https://github.com/user-attachments/assets/bfe33e0e-8d46-4cc1-bd49-ad57ca8280a0" />
